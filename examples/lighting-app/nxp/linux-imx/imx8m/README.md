@@ -34,8 +34,8 @@ image need to be generated.
 -   Download the Yocto source code and generate the Yocto SDK and the SD card
     image
 
-    The Yocto source code is maintained with with a repo manifest, the tool
-    `repo` is used to download the source code.
+    The Yocto source code is maintained with a repo manifest, the tool `repo`
+    is used to download the source code.
 
     This document is tested with the i.MX Yocto 5.10.35_2.0.0 release. Run the
     commands below to download this release:
@@ -202,6 +202,11 @@ The generated executable file supports to work with below commandline argument:
 
 -   Running
 
+    -   Initialize the BT device on the i.MX 8M Mini EVK board
+
+              $ modprobe moal mod_para=nxp/wifi_mod_para.conf       # Load the Wi-Fi/BT firmware
+              $ hciattach /dev/ttymxc0 any 115200 flow              # Initialize the BT device
+
     -   Find the Bluetooth device id for i.MX 8M Mini EVK by executing the
         command below. The number following string `hci` is the Bluetooth device
         id, `0` in this example.
@@ -215,8 +220,6 @@ The generated executable file supports to work with below commandline argument:
 
     -   Run the Linux Lighting Example App
 
-              $ modprobe moal mod_para=nxp/wifi_mod_para.conf       # Load the Wi-Fi/BT firmware
-              $ hciattach /dev/ttymxc0 any 115200 flow              # Initialize the BT device
               $ /home/root/chip-lighting-app --ble-device 0         # The bluetooth device used is hci0
 
     -   Run [ChipDeviceController](../../../../../src/controller/python) on the
